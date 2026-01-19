@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.Constants;
 
 /**
  * The methods in this class are called automatically corresponding to each mode, as described in
@@ -28,10 +29,10 @@ public class Robot extends TimedRobot {
   private final SendableChooser<String> m_chooser = new SendableChooser<>();
 
 
-  private SparkMax front_right = new SparkMax(1, MotorType.kBrushless); //defining motors
-  private SparkMax back_right = new SparkMax(2, MotorType.kBrushless);
-  private SparkMax front_left = new SparkMax(3, MotorType.kBrushless);
-  private SparkMax back_left = new SparkMax(4, MotorType.kBrushless);
+  private SparkMax front_right = new SparkMax(Constants.Front_right_ID, MotorType.kBrushless); //defining motors
+  private SparkMax back_right = new SparkMax(Constants.back_right_ID, MotorType.kBrushless);
+  private SparkMax front_left = new SparkMax(Constants.Front_left_ID, MotorType.kBrushless);
+  private SparkMax back_left = new SparkMax(Constants.back_left_ID, MotorType.kBrushless);
 
 
   private SparkMaxConfig motor_config = new SparkMaxConfig(); //creating motor configuration
