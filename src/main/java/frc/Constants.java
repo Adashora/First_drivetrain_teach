@@ -8,6 +8,7 @@ public class Constants {
     public static final int back_left_ID = 4;
     public static final int back_right_ID = 2;
 
+    public static final int pivot_motor_ID = 5; 
 
 
 

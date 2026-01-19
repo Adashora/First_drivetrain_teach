@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.Constants;
 
 /**
@@ -34,6 +35,9 @@ public class Robot extends TimedRobot {
   private SparkMax front_left = new SparkMax(Constants.Front_left_ID, MotorType.kBrushless);
   private SparkMax back_left = new SparkMax(Constants.back_left_ID, MotorType.kBrushless);
 
+  private SparkMax pivot_motor = new SparkMax(Constants.pivot_motor_ID, MotorType.kBrushless);
+
+
 
   private SparkMaxConfig motor_config = new SparkMaxConfig(); //creating motor configuration
   private SparkMaxConfig follow_config1 = new SparkMaxConfig();
@@ -42,6 +46,10 @@ public class Robot extends TimedRobot {
 
   private Joystick r_joystick = new Joystick(1);
   private Joystick l_Joystick = new Joystick(0);
+
+  private JoystickButton pivot_up = new JoystickButton(r_joystick, 2);
+  private JoystickButton pivot_down= new JoystickButton(r_joystick, 3);
+
   /**
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
@@ -57,7 +65,7 @@ public class Robot extends TimedRobot {
     .idleMode(IdleMode.kBrake);
 
     follow_config2
-    .follow(3) //configures motor to follow motor with ID 1
+    .follow(3) //configures motor to follow motor with ID 3
     .idleMode(IdleMode.kBrake);
 
     motor_config
@@ -70,13 +78,17 @@ public class Robot extends TimedRobot {
 
     this.front_left.configure(motor_config, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters); //leader motor
 
-    this.back_right.configure(follow_config2, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters); //follow motor
+    this.back_left.configure(follow_config2, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters); //left follow motor
 
     //inverting motors
-    front_right.setInverted(true);
-    back_right.setInverted(true);
-    back_left.setInverted(true);
-    front_left.setInverted(true);
+    //front_right.setInverted(true);
+    //back_right.setInverted(true);
+    //back_left.setInverted(true);
+    //front_left.setInverted(true);
+
+    //pivot_motor.setInverted(true);
+
+    
 
   }
 
@@ -140,6 +152,23 @@ public class Robot extends TimedRobot {
 
     front_right.set(-r_joystick.getX());
     front_left.set(+r_joystick.getX());
+
+
+    
+    if (pivot_up.getAsBoolean()){
+      pivot_motor.set(0.5);
+    }
+    else if (pivot_down.getAsBoolean()){
+
+      pivot_motor.set(-0.5);
+
+    }
+    else {
+
+      pivot_motor.set(0);
+    }
+
+
    
     
   }
